@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -23,7 +24,13 @@ public class Invitation {
 
     private Status status;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToOne
+    @JoinColumn(name="organization_id")
+    private Organization organization;
+
+    @ManyToMany
+    @JoinTable(name = "user_invitation",
+            joinColumns = @JoinColumn(name = "invitation_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
 }

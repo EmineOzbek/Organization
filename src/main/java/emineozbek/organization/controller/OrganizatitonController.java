@@ -19,7 +19,7 @@ public class OrganizatitonController {
     private final OrganizationService organizationService;
 
     @PostMapping("/saveOrganization")
-    public ResponseEntity<OrganizationResponseDto> saveUser(@RequestBody final OrganizationRequestDto organizationRequestDto) {
+    public ResponseEntity<OrganizationResponseDto> saveOrganization(@RequestBody final OrganizationRequestDto organizationRequestDto) {
         return new ResponseEntity<>(organizationService.saveOrganization(organizationRequestDto), HttpStatus.OK);
     }
 
@@ -43,9 +43,10 @@ public class OrganizatitonController {
         return new ResponseEntity<>(organizationService.getAllOrganizations(), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/getOrganizationByRegisterNumber")
     public ResponseEntity<OrganizationResponseDto> getOrganizationByRegisterNumber(@RequestParam final Long registerNumber) {
         return new ResponseEntity<>(organizationService.getOrganizationByRegisterNumber(registerNumber), HttpStatus.OK);
     }
+
 
 }

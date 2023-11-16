@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,11 +29,14 @@ public class Organization {
 
     private String email;
 
-    private Date foundedYear;
+    private LocalDate foundedYear;
 
     private String phoneNumber;
 
     private int companySize;
+
+    @OneToOne(mappedBy = "organization")
+    private Invitation invitation;
 
     @ManyToMany
     @JoinTable(name = "user_organization",

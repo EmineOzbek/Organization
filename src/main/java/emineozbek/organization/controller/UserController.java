@@ -53,12 +53,12 @@ public class UserController {
     }
 
     @PutMapping("/updateUserStatus")
-    public ResponseEntity<UserResponseDto> getUserByStatus(@RequestBody final UserUpdateRequestDto userUpdateRequestDto) {
+    public ResponseEntity<UserResponseDto> updateUserStatus(@RequestBody final UserUpdateRequestDto userUpdateRequestDto) {
         return new ResponseEntity<>(userService.updateUserStatus(userUpdateRequestDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteUserById")
-    public ResponseEntity<String> deleteUserById(@RequestParam final Integer userId) {
+    public ResponseEntity<String> deleteUserById(@RequestParam final UUID userId) {
         return new ResponseEntity<>(userService.deleteUserById(userId), HttpStatus.OK);
     }
 }

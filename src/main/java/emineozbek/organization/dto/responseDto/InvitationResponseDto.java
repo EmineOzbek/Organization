@@ -8,10 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserResponseDto {
-
-    private String fullName;
+public class InvitationResponseDto {
 
     private Status status;
 
+    private String invitationMessage;
+
+    private String organizationName;
 }

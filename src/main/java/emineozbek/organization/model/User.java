@@ -29,7 +29,7 @@ public class User {
 
     private Status status;
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "users")
     private List<Invitation> invitations;
 
     @ManyToMany(mappedBy = "users")

@@ -1,6 +1,5 @@
 package emineozbek.organization.dto.requestDto;
 
-import emineozbek.organization.model.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,9 +7,12 @@ import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
-public class UserUpdateRequestDto {
+public class InvitationRequestDto {
 
-    private UUID id;
+    private String invitationMessage;
 
-    private Status status;
+    private UUID userId;
+
+    private UUID organizationId;
+
 }

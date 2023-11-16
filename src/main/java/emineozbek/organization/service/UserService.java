@@ -7,6 +7,7 @@ import emineozbek.organization.dto.responseDto.UserResponseDto;
 import emineozbek.organization.model.Status;
 import emineozbek.organization.model.User;
 import emineozbek.organization.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
-    private ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
     public UserResponseDto saveUser(final UserRequestDto userRequestDto) {
         final User user = modelMapper.map(userRequestDto, User.class);
@@ -50,19 +52,19 @@ public class UserService {
     }
 
     public List<OrganizationResponseDto> getAllOrganizationsByUser(final UUID id) {
-        return userRepository.findAllOrganizationsByUser(id)
+        return userRepository.findAllOrganizationsById(id)
                 .stream()
                 .map(organization -> modelMapper.map(organization, OrganizationResponseDto.class))
                 .toList();
     }
 
     public UserResponseDto updateUserStatus(final UserUpdateRequestDto userUpdateRequestDto) {
-        final User user = userRepository.findById(userUpdateRequestDto.id()).orElseThrow();
-        user.setStatus(userUpdateRequestDto.status());
+        final User user = userRepository.findById(userUpdateRequestDto.getId()).orElseThrow();
+        user.setStatus(userUpdateRequestDto.getStatus());
         return modelMapper.map(userRepository.save(user), UserResponseDto.class);
     }
 
-    public String deleteUserById(final Integer userId) {
+    public String deleteUserById(final UUID userId) {
         userRepository.deleteById(userId);
         return String.format("%s Id'li kullanıcı silindi!", userId);
     }
